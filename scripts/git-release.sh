@@ -1,5 +1,7 @@
 #!/bin/bash
 
+cd "$(git rev-parse --show-toplevel)" || exit 1
+
 VERSION=$(grep '^version=' gradle.properties | cut -d'=' -f2)
 
 # Verifica se a tag já existe
