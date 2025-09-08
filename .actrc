@@ -1,0 +1,3 @@
+# Act configuration file
+# Use the default Docker image for running workflows
+-P ubuntu-latest=ghcr.io/catthehacker/ubuntu:act-latest

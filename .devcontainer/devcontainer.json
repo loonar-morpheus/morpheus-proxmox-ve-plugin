@@ -23,7 +23,8 @@
         "redhat.vscode-yaml",
         "funkyremi.vscode-google-translate",
         "vivaxy.vscode-conventional-commits",
-        "onlyutkarsh.git-config-user-profiles"
+        "onlyutkarsh.git-config-user-profiles",
+        "vscjava.vscode-gradle"
       ],
       "settings": {
         "java.configuration.runtimes": [
