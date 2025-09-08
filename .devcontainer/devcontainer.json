@@ -1,7 +1,7 @@
 {
   "name": "Morpheus Proxmox VE Plugin Development",
   "image": "mcr.microsoft.com/devcontainers/java:1-17-bullseye",
-  
+
   "features": {
     "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {
       "version": "latest",
@@ -22,7 +22,8 @@
         "ms-vscode.vscode-json",
         "redhat.vscode-yaml",
         "funkyremi.vscode-google-translate",
-        "vivaxy.vscode-conventional-commits"
+        "vivaxy.vscode-conventional-commits",
+        "onlyutkarsh.git-config-user-profiles"
       ],
       "settings": {
         "java.configuration.runtimes": [
@@ -44,15 +45,17 @@
   },
 
   "forwardPorts": [8080, 3000, 8443],
-  
+
   "postCreateCommand": "bash .devcontainer/post-create.sh",
-  
+
   "remoteUser": "vscode",
-  
+
   "mounts": [
-    "source=/var/run/docker.sock,target=/var/run/docker-host.sock,type=bind,consistency=cached"
+    "source=/var/run/docker.sock,target=/var/run/docker-host.sock,type=bind,consistency=cached",
+    "source=${env:HOME}/.gitconfig,target=/home/vscode/.gitconfig,type=bind",
+    "source=${env:HOME}/.ssh,target=/home/vscode/.ssh,type=bind"
   ],
-  
+
   "containerEnv": {
     "GRADLE_USER_HOME": "/tmp/.gradle"
   }

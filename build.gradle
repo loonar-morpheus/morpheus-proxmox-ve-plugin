@@ -26,10 +26,12 @@ ext.isReleaseVersion = !version.endsWith("SNAPSHOT")
 java {
 	sourceCompatibility = JavaVersion.toVersion('1.11')
     targetCompatibility = JavaVersion.toVersion('1.11')
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
 }
 
 repositories {
-	mavenLocal()
 	mavenCentral()
 }
 
