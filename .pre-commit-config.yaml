@@ -7,3 +7,9 @@ repos:
         language: system
         pass_filenames: false
         always_run: true
+    -   id: post-commit-debug
+        name: Debug Post-Commit Hook
+        entry: echo "Post-commit hook debug"
+        language: system
+        pass_filenames: false
+        always_run: true

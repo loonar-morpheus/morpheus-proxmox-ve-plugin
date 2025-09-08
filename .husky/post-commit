@@ -1,5 +1,8 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-# Run git-release.sh
+echo "Post-commit hook executed"
+
+# Change directory to ./scripts in the repository root and run git-release.sh
+cd "$(git rev-parse --show-toplevel)/scripts" || exit 1
 bash git-release.sh
