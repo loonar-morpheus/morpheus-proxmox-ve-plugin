@@ -43,3 +43,40 @@ venv/bin/pre-commit install
 
 # Deactivate the virtual environment
 deactivate
+
+# Check if Node.js is installed
+if ! command -v npm &> /dev/null
+then
+    echo "Node.js could not be found. Installing..."
+    # Install Node.js
+    sudo apt update && sudo apt install -y nodejs npm
+else
+    echo "Node.js is already installed."
+fi
+
+# Ensure package.json exists before running husky-init
+if [ ! -f "package.json" ]; then
+  echo "package.json not found. Creating one..."
+  npm init -y
+fi
+
+# Ensure the script runs from the Git root
+GIT_ROOT=$(git rev-parse --show-toplevel)
+cd "$GIT_ROOT" || exit
+
+# Install Husky
+if [ ! -d ".husky" ]; then
+  echo "Husky directory not found. Initializing Husky..."
+  npx husky-init && npm install
+fi
+
+# Configure Husky post-commit hook
+cat <<EOT > "$GIT_ROOT/.husky/post-commit"
+#!/bin/sh
+. "\$(dirname "\$0")/_/husky.sh"
+
+# Run git-release.sh
+bash git-release.sh
+EOT
+
+chmod +x "$GIT_ROOT/.husky/post-commit"
