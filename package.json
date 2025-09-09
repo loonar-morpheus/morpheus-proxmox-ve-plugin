@@ -1,0 +1,28 @@
+{
+  "name": "morpheus-proxmox-ve-plugin",
+  "version": "1.0.0",
+  "description": "The Proxmox Plugin is a Morpheus Cloud Plugin that synchronizes VMs, templates, datastores, networks, resource pools and hypervisor hosts, then exposes VM Instance provisioning functionality",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"WARN: no test specified\" && exit 0",
+    "prepare": "husky install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/loonar-morpheus/morpheus-proxmox-ve-plugin.git"
+  },
+  "keywords": [],
+  "author": "Loonar Cloud",
+  "license": "MIT",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/loonar-morpheus/morpheus-proxmox-ve-plugin/issues"
+  },
+  "homepage": "https://github.com/loonar-morpheus/morpheus-proxmox-ve-plugin#readme",
+  "devDependencies": {
+    "husky": "^8.0.0"
+  }
+}
