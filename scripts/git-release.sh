@@ -1,25 +1,33 @@
 #!/bin/bash
 
-cd "$(git rev-parse --show-toplevel)" || exit 1
+
+set -euo pipefail
+
+cd "$(git rev-parse --show-toplevel)"
 
 VERSION=$(grep '^version=' gradle.properties | cut -d'=' -f2)
+if [ -z "$VERSION" ]; then
+  echo "Erro: versão não encontrada em gradle.properties."
+  exit 1
+fi
 
 echo "Releasing version: $VERSION"
 
-# Check if the tag already exists
-tag_exists=$(git tag -l "v")
-if [ -n "$tag_exists" ]; then
-  echo "Tag '$tag_exists' already exists. Skipping tag creation."
+# Verifica se a tag já existe
+if git rev-parse "refs/tags/$VERSION" >/dev/null 2>&1; then
+  echo "Tag '$VERSION' já existe. Saindo."
   exit 0
 fi
 
-# Check if the tag already exists
-if git rev-parse "v$VERSION" >/dev/null 2>&1; then
-  echo "Tag v$VERSION already exists."
+# Cria e envia a tag
+if git tag -a "$VERSION" -m "Release v$VERSION"; then
+  if git push origin "refs/tags/$VERSION"; then
+    echo "Tag $VERSION criada e enviada com sucesso."
+  else
+    echo "Erro ao enviar a tag para o repositório remoto."
+    exit 1
+  fi
 else
-  # Create and push the tag
-  git tag -a "v$VERSION" -m "Release v$VERSION"
-  git push origin "v$VERSION"
-
-  echo "Tag v$VERSION created and pushed successfully."
+  echo "Erro ao criar a tag."
+  exit 1
 fi
