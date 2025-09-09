@@ -9,7 +9,7 @@ echo "Releasing version: $VERSION"
 # Check if the tag already exists
 tag_exists=$(git tag -l "v")
 if [ -n "$tag_exists" ]; then
-  echo "Tag 'tag_exists' already exists. Skipping tag creation."
+  echo "Tag '$tag_exists' already exists. Skipping tag creation."
   exit 0
 fi
 
